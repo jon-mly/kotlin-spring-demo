@@ -21,7 +21,13 @@ class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handleMethodArgumentNotValidException(exception: MethodArgumentNotValidException): ResponseEntity<ApiResponse<Nothing>> {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-            .body(ApiResponse<Nothing>(ApiResponseStatus.FAILURE, null, "Invalid argument structure"))
+            .body(
+                ApiResponse<Nothing>(
+                    ApiResponseStatus.FAILURE,
+                    null,
+                    exception.message // ?: "Validation error : invalid value provided for argument"
+                )
+            )
 
     }
 
