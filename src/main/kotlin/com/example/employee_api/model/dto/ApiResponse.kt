@@ -7,4 +7,4 @@ enum class ApiResponseStatus(@JsonValue val value: String) {
     FAILURE("failure")
 }
 
-data class ApiResponse<T>(val status: ApiResponseStatus, val data: T, val message: String?)
+data class ApiResponse<T>(val status: ApiResponseStatus, val data: T?, val message: String?)
