@@ -1,0 +1,21 @@
+services:
+
+  # No Ports, handled by Coolify deployement
+
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: employeedb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+
+  app:
+    build: .
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DATABASE_URL: jdbc:postgresql://db:5432/employeedb
+      DATABASE_USERNAME: user
+      DATABASE_PASSWORD: password
+    depends_on:
+      db:
+        condition: service_started
